@@ -22,13 +22,13 @@ const RmBookingForm = ({ room, formData, closeDetail }) => {
   let totalBill = billAmount + tax;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 m-5 gap-5 w-full">
+    <div className="grid grid-cols-1 md:grid-cols-2 m-3 gap-5 w-full">
       <div className="border border-gray-300 rounded-lg bg-white p-4">
         <div className="text-xl md:text-2xl font-semibold">
           Guest Information
         </div>
 
-        <div className="flex items-center gap-2 my-3 justify-center">
+        <div className="flex text-sm md:text-[16px] items-center gap-2 my-3 justify-center">
           <div>
             <label htmlFor="First Name">First Name</label>
             <input
@@ -46,7 +46,7 @@ const RmBookingForm = ({ room, formData, closeDetail }) => {
             />
           </div>
         </div>
-        <div className="my-3">
+        <div className="my-3 text-sm md:text-[16px]">
           <label htmlFor="Email">Email</label>
           <input
             className="border border-gray-200 py-1 px-2 w-full rounded outline-0"
@@ -56,7 +56,7 @@ const RmBookingForm = ({ room, formData, closeDetail }) => {
             placeholder="Enter email address"
           />
         </div>
-        <div className="my-3">
+        <div className="my-3 text-sm md:text-[16px]">
           <label htmlFor="Phone">Phone</label>
           <input
             className="border border-gray-200 py-1 px-2 w-full rounded outline-0"
@@ -66,17 +66,17 @@ const RmBookingForm = ({ room, formData, closeDetail }) => {
             placeholder="Enter phone number"
           />
         </div>
-        <div className="my-3 flex flex-col">
+        <div className="my-3 flex flex-col text-sm md:text-[16px]">
           <label htmlFor="Address">Address</label>
           <textarea
-            className="border border-gray-300 rounded h-20"
+            className="border p-2 border-gray-300 rounded h-20"
             type="text"
             name=""
             id="Address"
             placeholder="Enter  address"
           />
         </div>
-        <div className="flex items-center gap-2 my-3 justify-center">
+        <div className="flex items-center gap-2 my-3 justify-center text-sm md:text-[16px]">
           <div className="w-70 flex flex-col justify-start ">
             <label htmlFor="">ID Type</label>
             <select
@@ -101,22 +101,22 @@ const RmBookingForm = ({ room, formData, closeDetail }) => {
             />
           </div>
         </div>
-        <div className="my-3 flex flex-col">
+        <div className="my-3 flex flex-col text-sm md:text-[16px]">
           <label htmlFor="Special Requests">Special Requests</label>
           <textarea
-            className="border border-gray-300 rounded h-20"
+            className="border p-2 border-gray-300 rounded h-20"
             type="text"
             name=""
             id="Address"
             placeholder="Any special requests or preferences"
           />
         </div>
-        <div className="flex items-center my-5 font-semibold justify-center gap-2">
-          <button className="py-1 px-5 w-full border border-gray-400 rounded hover:bg-blue-100 hover:shadow-lg">
+        <div className="flex items-center my-5 font-semibold justify-center gap-2 text-sm md:text-[16px]">
+          <button className="py-1 px-2 md:px-5 text-[13px] md:text-[16px] w-full border border-gray-400 rounded hover:bg-blue-100 hover:shadow-lg">
             Back
           </button>
           <button
-            className="py-1 px-5 w-full border border-gray-400 rounded bg-black text-white hover:shadow-lg"
+            className="py-1 px-2 md:px-5 text-[13px] md:text-[16px] w-full border border-gray-400 rounded bg-black text-white hover:shadow-lg"
             onClick={handleClick}
           >
             Confirm Booking
@@ -156,7 +156,7 @@ const RmBookingForm = ({ room, formData, closeDetail }) => {
         <hr className="border border-gray-200 my-3 w-full " />
         <div className="flex items-center justify-between my-2 text-sm ">
           <p>Rooms Rate:</p>
-          <p>{room.price} </p>
+          <p>${room.price}/night </p>
         </div>
         <div className="flex items-center justify-between my-2 text-sm ">
           <p>Taxes & Fees:</p>
@@ -174,7 +174,7 @@ const RmBookingForm = ({ room, formData, closeDetail }) => {
           </p>
         </div>
         <div>
-          <button onClick={closeDetail}>Go Back</button>
+          <button className="py-1 px-2 md:px-5 text-[13px] md:text-[16px] w-full border border-gray-400 rounded bg-black text-white hover:shadow-lg" onClick={closeDetail}>Go Back</button>
         </div>
       </div>
     </div>

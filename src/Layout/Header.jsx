@@ -62,8 +62,8 @@ const Header = () => {
           to="/"
           className={({ isActive }) =>
             isActive
-              ? "bg-gray-800 text-white rounded text-[14px] md:text-[16px] p-[5px_10px] md:p-[8px_15px] font-semibold"
-              : "hover:text-white hover:bg-gray-800 rounded text-[14px] md:text-[16px] p-[5px_10px] md:p-[8px_15px] font-semibold"
+              ? "bg-gray-800 text-white rounded p-[5px_10px] md:p-[8px_15px] text-[13px] lg:text-[16px]  font-semibold"
+              : "hover:text-white hover:bg-gray-800 rounded p-[5px_10px] md:p-[8px_15px] text-[13px] lg:text-[16px]  font-semibold"
           }
         >
           Room Status
@@ -72,8 +72,8 @@ const Header = () => {
           to="/bookings"
           className={({ isActive }) =>
             isActive
-              ? "bg-gray-800 text-white rounded text-[14px] md:text-[16px] p-[5px_10px] md:p-[8px_15px] font-semibold"
-              : "hover:text-white hover:bg-gray-800 rounded text-[14px] md:text-[16px] p-[5px_10px] md:p-[8px_15px] font-semibold"
+              ? "bg-gray-800 text-white rounded p-[5px_10px] md:p-[8px_15px] text-[13px] lg:text-[16px]  font-semibold"
+              : "hover:text-white hover:bg-gray-800 rounded p-[5px_10px] md:p-[8px_15px] text-[13px] lg:text-[16px]  font-semibold"
           }
         >
           Bookings
@@ -82,8 +82,8 @@ const Header = () => {
           to="/newbooking"
           className={({ isActive }) =>
             isActive
-              ? "bg-gray-800 text-white rounded text-[14px] md:text-[16px] p-[5px_10px] md:p-[8px_15px] font-semibold"
-              : "hover:text-white hover:bg-gray-800 rounded text-[14px] md:text-[16px] p-[5px_10px] md:p-[8px_15px] font-semibold"
+              ? "bg-gray-800 text-white rounded p-[5px_10px] md:p-[8px_15px] text-[13px] lg:text-[16px]  font-semibold"
+              : "hover:text-white hover:bg-gray-800 rounded p-[5px_10px] md:p-[8px_15px] text-[13px] lg:text-[16px]  font-semibold"
           }
         >
           New Booking

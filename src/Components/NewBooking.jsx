@@ -26,7 +26,7 @@ const NewBooking = () => {
     }
   }
   return (
-    <div className="my-10">
+    <div className="my-10 mx-3">
       <div className="bg-white  p-2 rounded-xl mx-auto">
         <h1 className="text-lg md:text-2xl font-medium">
           Search Available Rooms

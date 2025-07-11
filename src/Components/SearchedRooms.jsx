@@ -16,7 +16,7 @@ const SearchedRooms = (props) => {
     <div className="flex flex-wrap items-center justify-around place-items-center my-10">
       {searchedRoomData.map((item, id) => {
         return (
-          <div key={id} className="bg-white rounded p-3 w-76 md:w-94 mb-5">
+          <div key={id} className="bg-white rounded p-3 w- md:w-94 mb-5">
             <div className="h-40 md:h-50 w-70 md:w-88 flex justify-center items-center bg-gray-300 rounded">
               <LuBed className="text-3xl text-gray-400" />
             </div>
@@ -59,7 +59,7 @@ const SearchedRooms = (props) => {
                 </span>
                 <span>AC</span>
               </p>
-              <p className="flex items-center gap-1 border border-gray-400 px-[2px] rounded-lg">
+              <p className="text-[12px] md:text-[14px] flex items-center gap-1 border border-gray-400 px-[2px] rounded-lg">
                 {" "}
                 +1 more
               </p>
