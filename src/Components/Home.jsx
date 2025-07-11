@@ -48,7 +48,10 @@ const Home = () => {
 
       {/* Room Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {rooms.map((item) => (
+        {rooms.filter(
+            (item) =>
+              statusFilter === "All Rooms" ||  statusFilter === item.status
+          ).map((item) => (
             <div
               key={item.id}
               className={`border border-gray-200 rounded-xl hover:shadow-lg p-3 text-gray-500
