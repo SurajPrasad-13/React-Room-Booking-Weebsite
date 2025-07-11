@@ -11,7 +11,6 @@ import RmBookingForm from "./RmBookingForm";
 import { useNavigate } from "react-router-dom";
 
 const SearchedRooms = (props) => {
-  // const { checkInDate, checkOutDate, rooms, guests } = props.formData;
   const [selectedRoom, setselectedRoom] = useState(null);
 
   return (

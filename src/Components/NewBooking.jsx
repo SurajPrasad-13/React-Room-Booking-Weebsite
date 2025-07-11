@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import SearchedRooms from "./SearchedRooms";
-// import NewRoomBooking from "./RmBookingForm";
-// import BookingConfirmed from "./BookingConfirmed";
-import RmBookingForm from "./RmBookingForm";
 
 const NewBooking = () => {
   const [checkInDate, setcheckInDate] = useState("");

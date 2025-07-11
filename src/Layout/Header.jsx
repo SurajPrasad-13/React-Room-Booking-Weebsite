@@ -1,4 +1,3 @@
-import React from "react";
 import { CiCalendar } from "react-icons/ci";
 import { IoPeopleOutline } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
