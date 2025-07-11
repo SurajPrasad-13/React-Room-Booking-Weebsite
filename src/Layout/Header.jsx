@@ -5,13 +5,13 @@ import { NavLink } from "react-router-dom";
 const Header = () => {
   return (
     <>
-      <div className="flex items-center flex-wrap justify-start gap-5 sm:justify-between mx-5 md:mx-10">
-        <div>
-          <p className="text-xl md:text-3xl font-bold">Hotel Management</p>
-          <p className="text-gray-600">Manage rooms, bookings, and occupancy</p>
+      <div className="flex items-center justify-start gap-5 sm:justify-between my-3 md:my-5 mx-3 md:mx-10">
+        <div className="">
+          <p className="sm:text-xl md:text-3xl font-bold">Hotel Management</p>
+          <p className="text-gray-600 text-[10px]">Manage rooms, bookings, and occupancy</p>
         </div>
-        <NavLink to='/newbooking' className="rounded-lg bg-gradient-to-r from-[#2d60eb] to-[#9134ea] text-white font-medium p-2 md:px-4">
-          +  New Booking
+        <NavLink to='/newbooking' className="rounded-lg bg-gradient-to-r from-[#2d60eb] to-[#9134ea] text-[10px] text-white font-medium p-2 md:px-4">
+          + New Booking
         </NavLink>
       </div>
       <div

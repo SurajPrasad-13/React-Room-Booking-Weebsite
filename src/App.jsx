@@ -5,7 +5,7 @@ function App() {
   
 
   return (
-    <div className='bg-[#f2f7fc] py-9'>
+    <div className='bg-[#f2f7fc] py-4'>
       <Layout/>
     </div>
   )

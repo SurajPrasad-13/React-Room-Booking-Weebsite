@@ -8,7 +8,6 @@ import { FaStar } from "react-icons/fa6";
 import { searchedRoomData } from "../assets/Data";
 import { WiFire } from "react-icons/wi";
 import RmBookingForm from "./RmBookingForm";
-import { useNavigate } from "react-router-dom";
 
 const SearchedRooms = (props) => {
   const [selectedRoom, setselectedRoom] = useState(null);
@@ -17,8 +16,8 @@ const SearchedRooms = (props) => {
     <div className="flex flex-wrap items-center justify-around place-items-center my-10">
       {searchedRoomData.map((item, id) => {
         return (
-          <div key={id} className="bg-white rounded p-3 w-110 md:w-94 mb-5">
-            <div className="h-70 md:h-50 w-104 md:w-88 flex justify-center items-center bg-gray-300 rounded">
+          <div key={id} className="bg-white rounded p-3 w-76 md:w-94 mb-5">
+            <div className="h-40 md:h-50 w-70 md:w-88 flex justify-center items-center bg-gray-300 rounded">
               <LuBed className="text-3xl text-gray-400" />
             </div>
             <div className="flex justify-between items-center my-3">
@@ -76,7 +75,6 @@ const SearchedRooms = (props) => {
               <button
                 onClick={() => {
                   setselectedRoom(item);
-                  // navigate("/rmBookingform");
                 }}
                 className="bg-gray-800 text-white py-1 px-2 rounded font-medium"
               >
