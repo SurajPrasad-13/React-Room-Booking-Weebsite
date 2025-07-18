@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { bookingData } from "../assets/Data";
+import { bookingData } from "../../assets/Data";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
-
+import HotelNavigation from "./HotelNavigation";
 const Bookings = () => {
   const [checkedOutBookings, setCheckedOutBookings] = useState([]);
 
@@ -14,6 +14,9 @@ const Bookings = () => {
   };
 
   return (
+    <>
+
+    <HotelNavigation/>
     <div className="bg-white m-4 p-3 rounded-xl">
       <div className="flex flex-wrap gap-3 items-center justify-between">
         <h1 className="md:text-2xl font-medium">Recent Bookings</h1>
@@ -79,6 +82,7 @@ const Bookings = () => {
         );
       })}
     </div>
+    </>
   );
 };
 

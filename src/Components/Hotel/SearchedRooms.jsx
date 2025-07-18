@@ -5,8 +5,7 @@ import { IoWifi } from "react-icons/io5";
 import { TbAirConditioning } from "react-icons/tb";
 import { GoPeople } from "react-icons/go";
 import { FaStar } from "react-icons/fa6";
-import { searchedRoomData } from "../assets/Data";
-import { WiFire } from "react-icons/wi";
+import { searchedRoomData } from "../../assets/Data";
 import RmBookingForm from "./RmBookingForm";
 
 const SearchedRooms = (props) => {

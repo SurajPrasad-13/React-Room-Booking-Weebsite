@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import SearchedRooms from "./SearchedRooms";
+import HotelNavigation from "./HotelNavigation";
+
 
 const NewBooking = () => {
   const [checkInDate, setcheckInDate] = useState("");
@@ -26,6 +28,8 @@ const NewBooking = () => {
     }
   }
   return (
+    <>
+    <HotelNavigation/>
     <div className="my-10 mx-3">
       <div className="bg-white  p-2 rounded-xl mx-auto">
         <h1 className="text-lg md:text-2xl font-medium">
@@ -102,6 +106,7 @@ const NewBooking = () => {
       </div>
       {search ? <SearchedRooms formData={formData} /> : null}
     </div>
+    </>
   );
 };
 
