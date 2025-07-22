@@ -4,19 +4,6 @@ import { FiCalendar } from "react-icons/fi";
 import { IoMenu } from "react-icons/io5";
 import { GoPeople } from "react-icons/go";
 import { IoSettingsOutline } from "react-icons/io5";
-import { FaArrowTrendUp } from "react-icons/fa6";
-import { MdOutlinePeopleAlt } from "react-icons/md";
-import { CiCalendar } from "react-icons/ci";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { LuCalendar } from "react-icons/lu";
-
-
-
-
-
-
-
-
 
 
 const Header = () => {

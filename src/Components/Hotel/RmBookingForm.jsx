@@ -11,8 +11,11 @@ const RmBookingForm = ({ room, formData, closeDetail }) => {
     const end = new Date(endDate);
     const diffTime = end.getTime() - start.getTime();
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-    return diffDays;
+    if (diffDays === 0) {
+      return 1;
+    } else if (diffDays > 0) {
+      return diffDays;
+    }
   };
   let tax = 14.4;
   let billAmount =
@@ -65,6 +68,48 @@ const RmBookingForm = ({ room, formData, closeDetail }) => {
             id="Phone"
             placeholder="Enter phone number"
           />
+        </div>
+        <div>
+          <div className="flex text-sm md:text-[16px] items-center gap-2 my-3 justify-center">
+            <div>
+              <label htmlFor="First Name">Check-in Date:</label>
+              <input
+                className="border border-gray-200 py-1 px-2 w-full rounded outline-0"
+                type="date"
+                value={formData.checkInDate}
+              />
+            </div>
+            <div>
+              <label htmlFor="First Name">Check-Out Date:</label>
+              <input
+                className="border border-gray-200 py-1 px-2 w-full rounded outline-0"
+                type="date"
+                value={formData.checkInDate}
+              />
+            </div>
+          </div>
+
+          <div className="flex text-sm md:text-[16px] items-center gap-2 my-3 justify-center">
+            <div>
+              <label htmlFor="First Name">Nights:</label>
+              <input
+                className="border border-gray-200 py-1 px-2 w-full rounded outline-0"
+                type="number"
+                value={getDateDifference(
+                  formData.checkInDate,
+                  formData.checkOutDate
+                )}
+              />
+            </div>
+            <div>
+              <label htmlFor="First Name">Guests:</label>
+              <input
+                className="border border-gray-200 py-1 px-2 w-full rounded outline-0"
+                type="number"
+                value={formData.guests}
+              />
+            </div>
+          </div>
         </div>
         <div className="my-3 flex flex-col text-sm md:text-[16px]">
           <label htmlFor="Address">Address</label>
@@ -174,7 +219,12 @@ const RmBookingForm = ({ room, formData, closeDetail }) => {
           </p>
         </div>
         <div>
-          <button className="py-1 px-2 md:px-5 text-[13px] md:text-[16px] w-full border border-gray-400 rounded bg-black text-white hover:shadow-lg" onClick={closeDetail}>Go Back</button>
+          <button
+            className="py-1 px-2 md:px-5 text-[13px] md:text-[16px] w-full border border-gray-400 rounded bg-black text-white hover:shadow-lg"
+            onClick={closeDetail}
+          >
+            Go Back
+          </button>
         </div>
       </div>
     </div>
