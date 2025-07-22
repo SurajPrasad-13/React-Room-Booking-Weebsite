@@ -11,12 +11,17 @@ const HotelNavigation = () => {
             Manage rooms, bookings, and occupancy
           </p>
         </div>
-        <NavLink
-          to="/newbooking"
-          className="rounded-lg bg-gradient-to-r from-[#2d60eb] to-[#9134ea] text-[10px] md:text-[16px] text-white font-medium p-2 md:px-4"
-        >
-          + New Booking
-        </NavLink>
+        <div className="flex flex-col md:flex-row items-center justify-center gap-1 md:gap-4">
+          <div className="rounded-lg bg-gradient-to-r from-[#4575fa] to-[#1acd91] text-[10px] md:text-[16px] text-white font-medium p-2 md:px-4 hover:shadow-lg hover:scale-105 transition-all duration-200">
+            + Add Room
+          </div>
+          <NavLink
+            to="/newbooking"
+            className="rounded-lg bg-gradient-to-r from-[#2d60eb] to-[#9134ea] text-[10px] md:text-[16px] text-white font-medium p-2 md:px-4 hover:shadow-lg hover:scale-105 transition-all duration-200"
+          >
+            + New Booking
+          </NavLink>
+        </div>
       </div>
       <div
         className="flex flex-col md:flex-row justify-around gap-4 items-center mx-5
