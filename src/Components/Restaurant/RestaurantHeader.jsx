@@ -69,7 +69,7 @@ function RestaurantHeader() {
       </div>
       <div className="bg-[#f3f4f6] w-full rounded-lg my-5 px-2 py-2 flex items-center justify-between gap-1">
         <NavLink
-          to="/"
+          to="/tables"
           className={({ isActive }) =>
             isActive
               ? "bg-black text-white rounded px-2 py-1 text-xs font-medium text-center flex-1"
