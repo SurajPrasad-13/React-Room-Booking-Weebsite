@@ -1,4 +1,5 @@
 import { useNavigate, useLocation } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 const RmBookingForm = () => {
   const navigate = useNavigate();
@@ -43,10 +44,28 @@ const RmBookingForm = () => {
     formState: { errors },
   } = useForm();
 
-  const handleClick = (data) => {
-    alert("Booking confirmed! Confirmation details will be sent to your email");
-    console.log(data);
-    navigate("/bookingConfirmed");
+  const handleFormSubmit = async (data) => {
+    try{
+      toast("Booking confirmed! Confirmation details will be sent to your email");
+      // console.log(data);
+      let response = await fetch(
+        "http://localhost:4001/api/v1/userdetails/upload",{
+          method:'post',
+          headers:{"Content-Type":"application/json"},
+          body:JSON.stringify(data)
+        }
+      );
+      response = await response.json();
+      console.log(response)
+      setTimeout(() => {
+        navigate("/bookingConfirmed");
+      }, 3000);
+
+    }
+    catch(err){
+     console.error("Error during booking submission:", err);
+    toast.error("Booking failed. Please try again.");
+    }
   };
 
   return (
@@ -57,7 +76,7 @@ const RmBookingForm = () => {
           Guest Information
         </div>
 
-        <form action="" onSubmit={handleSubmit(handleClick)}>
+        <form action="" onSubmit={handleSubmit(handleFormSubmit)}>
           {/* Name section */}
           <div className="flex text-sm md:text-[16px]  items-center gap-2 my-3 justify-center">
             <div className="w-full">
@@ -87,7 +106,7 @@ const RmBookingForm = () => {
             </div>
             <div className="w-full">
               <label>Last Name </label>
-               {errors.lastName && (
+              {errors.lastName && (
                 <span className="text-sm text-red-700">
                   {errors.lastName.message}{" "}
                 </span>
@@ -109,7 +128,6 @@ const RmBookingForm = () => {
                 type="text"
                 placeholder="Enter last name"
               />
-             
             </div>
           </div>
 
@@ -117,15 +135,15 @@ const RmBookingForm = () => {
           <div className="my-3 text-sm md:text-[16px]">
             <label>Email</label>
             <input
-              {...register("email", {
+              {...register("Email", {
                 required: { value: true, message: "Email is Required" },
               })}
               className="border border-gray-200 py-1 px-2 w-full rounded outline-0"
               type="email"
               placeholder="Enter email address"
             />
-            {errors.email && (
-              <p className="text-sm text-red-700">{errors.email.message} </p>
+            {errors.Email && (
+              <p className="text-sm text-red-700">{errors.Email.message} </p>
             )}
           </div>
 
@@ -133,7 +151,7 @@ const RmBookingForm = () => {
           <div className="my-3 text-sm md:text-[16px]">
             <label>Phone</label>
             <input
-              {...register("phoneNum", {
+              {...register("PhoneNumber", {
                 minLength: {
                   value: 10,
                   message: "Phone Number must Contain at least 10 Characters",
@@ -146,16 +164,18 @@ const RmBookingForm = () => {
                 required: { value: true, message: "this field is required" },
               })}
               className="border border-gray-200 py-1 px-2 w-full rounded outline-0"
-              type="text"
+              type="number"
               placeholder="Enter phone number"
             />
-            {errors.phoneNum && (
-              <p className="text-sm text-red-700">{errors.phoneNum.message} </p>
+            {errors.PhoneNumber && (
+              <p className="text-sm text-red-700">
+                {errors.PhoneNumber.message}{" "}
+              </p>
             )}
           </div>
 
           {/* hidden Data */}
-          <div className="bg-red-50" hidden>
+          <div className="bg-red-50 hidden">
             <div className="flex text-sm md:text-[16px] items-center gap-2 my-3 justify-center">
               <div>
                 <label>Check-in Date:</label>
@@ -170,7 +190,7 @@ const RmBookingForm = () => {
               <div>
                 <label>Check-out Date:</label>
                 <input
-                  {...register("CheckOut")}
+                  {...register("checkOut")}
                   className="border border-gray-200 py-1 px-2 w-full rounded outline-0"
                   type="date"
                   value={formData.checkOutDate}
@@ -181,25 +201,32 @@ const RmBookingForm = () => {
 
             <div className="flex text-sm md:text-[16px] items-center gap-2 my-3 justify-center">
               <div>
-                <label>Nights:</label>
+                <label>Rooms:</label>
                 <input
-                  {...register("nights")}
+                  {...register("rooms")}
                   className="border border-gray-200 py-1 px-2 w-full rounded outline-0"
                   type="number"
-                  value={getDateDifference(
-                    formData.checkInDate,
-                    formData.checkOutDate
-                  )}
+                  value={formData.rooms}
                   readOnly
                 />
               </div>
               <div>
                 <label>Guests:</label>
                 <input
-                  {...register("guests")}
+                  {...register("guestCount")}
                   className="border border-gray-200 py-1 px-2 w-full rounded outline-0"
                   type="number"
                   value={formData.guests}
+                  readOnly
+                />
+              </div>
+              <div>
+                <label>Roomrates:</label>
+                <input
+                  {...register("Roomrates")}
+                  className="border border-gray-200 py-1 px-2 w-full rounded outline-0"
+                  type="number"
+                  value={room.price}
                   readOnly
                 />
               </div>
@@ -210,7 +237,7 @@ const RmBookingForm = () => {
           <div className="my-3 flex flex-col text-sm md:text-[16px]">
             <label>Address</label>
             <textarea
-              {...register("address")}
+              {...register("Address")}
               className="border p-2 border-gray-300 rounded h-20"
               placeholder="Enter address"
             />
@@ -235,7 +262,7 @@ const RmBookingForm = () => {
             <div>
               <label>ID Number</label>
               <input
-                {...register("idNum", {
+                {...register("idNumber", {
                   required: { value: true, message: "this field is required" },
                 })}
                 className="border border-gray-200 py-1 px-2 w-full rounded outline-0"
@@ -244,14 +271,16 @@ const RmBookingForm = () => {
               />
             </div>
           </div>
-              {errors.idNum && (
-                <p className="text-sm flex justify-end text-red-700">{errors.idNum.message} </p>
-              )}
+          {errors.idNumber && (
+            <p className="text-sm flex justify-end text-red-700">
+              {errors.idNumber.message}{" "}
+            </p>
+          )}
 
           <div className="my-3 flex flex-col text-sm md:text-[16px]">
             <label>Special Requests</label>
             <textarea
-              {...register("specialRequests")}
+              {...register("SpecialRequest")}
               className="border p-2 border-gray-300 rounded h-20"
               placeholder="Any special requests or preferences"
             />
@@ -337,6 +366,19 @@ const RmBookingForm = () => {
           </button>
         </div>
       </div>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        // transition={Bounce}
+      />
     </div>
   );
 };
