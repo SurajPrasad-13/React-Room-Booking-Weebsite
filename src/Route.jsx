@@ -17,6 +17,7 @@ import RoomService from "./Components/Restaurant/RoomService";
 import TableBooking from "./Components/Restaurant/TableBooking";
 import Tables from "./Components/Restaurant/Tables";
 import Takeaway from "./Components/Restaurant/Takeaway";
+import SearchedRooms from "./Components/Hotel/SearchedRooms";
 
 export const router = createBrowserRouter([
   {
@@ -30,8 +31,9 @@ export const router = createBrowserRouter([
       { path: "hotel", element: <Hotel /> },
       { path: "bookings", element: <Bookings /> },
       { path: "newbooking", element: <NewBooking /> },
-      { path: "bookingConfirmed", element: <BookingConfirmed /> },
+      { path: "searched-rooms", element: <SearchedRooms /> },
       { path: "rmBookingform", element: <RmBookingForm /> },
+      { path: "bookingConfirmed", element: <BookingConfirmed /> },
 
       // Restaurant Routes
       { path: "/tables", element: <Tables /> },

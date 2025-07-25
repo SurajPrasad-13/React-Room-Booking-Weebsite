@@ -50,4 +50,16 @@ export const searchedRoomData = [
     maxMember: 4,
     price: "350",
   },
+  {
+    type: "Executive Suite",
+    rating: 4.8,
+    maxMember: 4,
+    price: "350",
+  },
+  {
+    type: "Executive Suite",
+    rating: 4.8,
+    maxMember: 4,
+    price: "350",
+  },
 ];
