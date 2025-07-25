@@ -1,5 +1,5 @@
 import { useNavigate, useLocation } from "react-router-dom";
-
+import { useForm } from "react-hook-form";
 const RmBookingForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -9,7 +9,9 @@ const RmBookingForm = () => {
   if (!room || !formData) {
     return (
       <div className="text-center mt-10">
-        <p className="text-red-600 font-semibold">Invalid access! No booking data found.</p>
+        <p className="text-red-600 font-semibold">
+          Invalid access! No booking data found.
+        </p>
         <button
           className="mt-4 py-2 px-4 bg-gray-800 text-white rounded"
           onClick={() => navigate(-1)}
@@ -19,11 +21,6 @@ const RmBookingForm = () => {
       </div>
     );
   }
-
-  const handleClick = () => {
-    alert("Booking confirmed! Confirmation details will be sent to your email");
-    navigate("/bookingConfirmed");
-  };
 
   const getDateDifference = (startDate, endDate) => {
     const start = new Date(startDate);
@@ -40,109 +37,251 @@ const RmBookingForm = () => {
     parseInt(formData.rooms);
   let totalBill = billAmount + tax;
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const handleClick = (data) => {
+    alert("Booking confirmed! Confirmation details will be sent to your email");
+    console.log(data);
+    navigate("/bookingConfirmed");
+  };
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 m-3 gap-5 w-full">
+    <div className="grid grid-cols-1 md:grid-cols-2 m-3 gap-5 w-auto">
       {/* Left Side: Form */}
-      <div className="border border-gray-300 rounded-lg bg-white p-4">
-        <div className="text-xl md:text-2xl font-semibold">Guest Information</div>
-
-        <div className="flex text-sm md:text-[16px] items-center gap-2 my-3 justify-center">
-          <div>
-            <label>First Name</label>
-            <input className="border border-gray-200 py-1 px-2 w-full rounded outline-0" type="text" placeholder="Enter first name" />
-          </div>
-          <div>
-            <label>Last Name</label>
-            <input className="border border-gray-200 py-1 px-2 w-full rounded outline-0" type="text" placeholder="Enter last name" />
-          </div>
+      <div className="border border-gray-300 rounded-lg bg-white p-4 mx-5">
+        <div className="text-xl md:text-2xl font-semibold">
+          Guest Information
         </div>
 
-        <div className="my-3 text-sm md:text-[16px]">
-          <label>Email</label>
-          <input className="border border-gray-200 py-1 px-2 w-full rounded outline-0" type="email" placeholder="Enter email address" />
-        </div>
-
-        <div className="my-3 text-sm md:text-[16px]">
-          <label>Phone</label>
-          <input className="border border-gray-200 py-1 px-2 w-full rounded outline-0" type="text" placeholder="Enter phone number" />
-        </div>
-
-        <div>
-          <div className="flex text-sm md:text-[16px] items-center gap-2 my-3 justify-center">
-            <div>
-              <label>Check-in Date:</label>
-              <input className="border border-gray-200 py-1 px-2 w-full rounded outline-0" type="date" value={formData.checkInDate} readOnly />
-            </div>
-            <div>
-              <label>Check-out Date:</label>
-              <input className="border border-gray-200 py-1 px-2 w-full rounded outline-0" type="date" value={formData.checkOutDate} readOnly />
-            </div>
-          </div>
-
-          <div className="flex text-sm md:text-[16px] items-center gap-2 my-3 justify-center">
-            <div>
-              <label>Nights:</label>
+        <form action="" onSubmit={handleSubmit(handleClick)}>
+          {/* Name section */}
+          <div className="flex text-sm md:text-[16px]  items-center gap-2 my-3 justify-center">
+            <div className="w-full">
+              <label>First Name</label>
               <input
+                {...register("firstName", {
+                  minLength: {
+                    value: 2,
+                    message: "First Name must Contain more than 2 Characters",
+                  },
+                  maxLength: {
+                    value: 10,
+                    message:
+                      "First Name can not Contain more than 10 Characters",
+                  },
+                  required: { value: true, message: "this field is required" },
+                })}
                 className="border border-gray-200 py-1 px-2 w-full rounded outline-0"
-                type="number"
-                value={getDateDifference(formData.checkInDate, formData.checkOutDate)}
-                readOnly
+                type="text"
+                placeholder="Enter first name"
+              />
+              {errors.firstName && (
+                <p className="text-sm text-red-700">
+                  {errors.firstName.message}{" "}
+                </p>
+              )}
+            </div>
+            <div className="w-full">
+              <label>Last Name </label>
+               {errors.lastName && (
+                <span className="text-sm text-red-700">
+                  {errors.lastName.message}{" "}
+                </span>
+              )}
+              <input
+                {...register("lastName", {
+                  minLength: {
+                    value: 2,
+                    message: "Last Name must Contain more than 2 Characters",
+                  },
+                  maxLength: {
+                    value: 10,
+                    message:
+                      "Last Name can not Contain more than 10 Characters",
+                  },
+                  required: { value: true, message: "this field is required" },
+                })}
+                className="border border-gray-200 py-1 px-2 w-full rounded outline-0"
+                type="text"
+                placeholder="Enter last name"
+              />
+             
+            </div>
+          </div>
+
+          {/* Email section */}
+          <div className="my-3 text-sm md:text-[16px]">
+            <label>Email</label>
+            <input
+              {...register("email", {
+                required: { value: true, message: "Email is Required" },
+              })}
+              className="border border-gray-200 py-1 px-2 w-full rounded outline-0"
+              type="email"
+              placeholder="Enter email address"
+            />
+            {errors.email && (
+              <p className="text-sm text-red-700">{errors.email.message} </p>
+            )}
+          </div>
+
+          {/* Phone Section */}
+          <div className="my-3 text-sm md:text-[16px]">
+            <label>Phone</label>
+            <input
+              {...register("phoneNum", {
+                minLength: {
+                  value: 10,
+                  message: "Phone Number must Contain at least 10 Characters",
+                },
+                maxLength: {
+                  value: 11,
+                  message:
+                    "Phone Number can not Contain more than 11 Characters",
+                },
+                required: { value: true, message: "this field is required" },
+              })}
+              className="border border-gray-200 py-1 px-2 w-full rounded outline-0"
+              type="text"
+              placeholder="Enter phone number"
+            />
+            {errors.phoneNum && (
+              <p className="text-sm text-red-700">{errors.phoneNum.message} </p>
+            )}
+          </div>
+
+          {/* hidden Data */}
+          <div className="bg-red-50" hidden>
+            <div className="flex text-sm md:text-[16px] items-center gap-2 my-3 justify-center">
+              <div>
+                <label>Check-in Date:</label>
+                <input
+                  {...register("checkIn")}
+                  className="border border-gray-200 py-1 px-2 w-full rounded outline-0"
+                  type="date"
+                  value={formData.checkInDate}
+                  readOnly
+                />
+              </div>
+              <div>
+                <label>Check-out Date:</label>
+                <input
+                  {...register("CheckOut")}
+                  className="border border-gray-200 py-1 px-2 w-full rounded outline-0"
+                  type="date"
+                  value={formData.checkOutDate}
+                  readOnly
+                />
+              </div>
+            </div>
+
+            <div className="flex text-sm md:text-[16px] items-center gap-2 my-3 justify-center">
+              <div>
+                <label>Nights:</label>
+                <input
+                  {...register("nights")}
+                  className="border border-gray-200 py-1 px-2 w-full rounded outline-0"
+                  type="number"
+                  value={getDateDifference(
+                    formData.checkInDate,
+                    formData.checkOutDate
+                  )}
+                  readOnly
+                />
+              </div>
+              <div>
+                <label>Guests:</label>
+                <input
+                  {...register("guests")}
+                  className="border border-gray-200 py-1 px-2 w-full rounded outline-0"
+                  type="number"
+                  value={formData.guests}
+                  readOnly
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Address */}
+          <div className="my-3 flex flex-col text-sm md:text-[16px]">
+            <label>Address</label>
+            <textarea
+              {...register("address")}
+              className="border p-2 border-gray-300 rounded h-20"
+              placeholder="Enter address"
+            />
+          </div>
+
+          {/* Id Section */}
+          <div className="flex items-center gap-2 my-3 justify-center text-sm md:text-[16px]">
+            <div className="w-70 flex flex-col justify-start ">
+              <label>ID Type</label>
+              <select
+                {...register("idType", {
+                  required: { value: true, message: "this field is required" },
+                })}
+                className="border border-gray-200 py-1 px-2 rounded outline-0"
+              >
+                <option>Select ID type</option>
+                <option>Passport</option>
+                <option>Driver's License</option>
+                <option>National Id</option>
+              </select>
+            </div>
+            <div>
+              <label>ID Number</label>
+              <input
+                {...register("idNum", {
+                  required: { value: true, message: "this field is required" },
+                })}
+                className="border border-gray-200 py-1 px-2 w-full rounded outline-0"
+                type="text"
+                placeholder="Enter ID number"
               />
             </div>
-            <div>
-              <label>Guests:</label>
-              <input className="border border-gray-200 py-1 px-2 w-full rounded outline-0" type="number" value={formData.guests} readOnly />
-            </div>
           </div>
-        </div>
+              {errors.idNum && (
+                <p className="text-sm flex justify-end text-red-700">{errors.idNum.message} </p>
+              )}
 
-        <div className="my-3 flex flex-col text-sm md:text-[16px]">
-          <label>Address</label>
-          <textarea className="border p-2 border-gray-300 rounded h-20" placeholder="Enter address" />
-        </div>
-
-        <div className="flex items-center gap-2 my-3 justify-center text-sm md:text-[16px]">
-          <div className="w-70 flex flex-col justify-start ">
-            <label>ID Type</label>
-            <select className="border border-gray-200 py-1 px-2 rounded outline-0">
-              <option>Select ID type</option>
-              <option>Passport</option>
-              <option>Driver's License</option>
-              <option>National Id</option>
-            </select>
+          <div className="my-3 flex flex-col text-sm md:text-[16px]">
+            <label>Special Requests</label>
+            <textarea
+              {...register("specialRequests")}
+              className="border p-2 border-gray-300 rounded h-20"
+              placeholder="Any special requests or preferences"
+            />
           </div>
-          <div>
-            <label>ID Number</label>
-            <input className="border border-gray-200 py-1 px-2 w-full rounded outline-0" type="text" placeholder="Enter ID number" />
+
+          {/* Button Section */}
+          <div className="flex items-center my-5 font-semibold justify-center gap-2 text-sm md:text-[16px]">
+            <button
+              className="py-1 px-2 md:px-5 w-full border border-gray-400 rounded hover:bg-blue-100 hover:shadow-lg"
+              onClick={() => navigate("/searched-rooms")}
+            >
+              Back
+            </button>
+            <button
+              type="submit"
+              className="py-1 px-2 md:px-5 w-full border border-gray-400 rounded bg-black text-white hover:shadow-lg"
+            >
+              Confirm Booking
+            </button>
           </div>
-        </div>
-
-        <div className="my-3 flex flex-col text-sm md:text-[16px]">
-          <label>Special Requests</label>
-          <textarea className="border p-2 border-gray-300 rounded h-20" placeholder="Any special requests or preferences" />
-        </div>
-
-        <div className="flex items-center my-5 font-semibold justify-center gap-2 text-sm md:text-[16px]">
-          <button
-            className="py-1 px-2 md:px-5 w-full border border-gray-400 rounded hover:bg-blue-100 hover:shadow-lg"
-            onClick={() => navigate(-1)}
-          >
-            Back
-          </button>
-          <button
-            className="py-1 px-2 md:px-5 w-full border border-gray-400 rounded bg-black text-white hover:shadow-lg"
-            onClick={handleClick}
-          >
-            Confirm Booking
-          </button>
-        </div>
+        </form>
       </div>
 
       {/* Right Side: Booking Summary */}
-      <div className="border border-gray-300 rounded-lg bg-white p-4">
+      <div className="border border-gray-300 rounded-lg bg-white p-4 mx-5">
         <div className="text-xl md:text-2xl font-semibold">Booking Summary</div>
         <div className="font-semibold">{room.type}</div>
-        <div className="text-gray-500">Comfortable standard room with city view</div>
+        <div className="text-gray-500">
+          Comfortable standard room with city view
+        </div>
 
         <div className="flex items-center justify-between my-2 text-sm">
           <p>Check-in:</p>
@@ -154,7 +293,9 @@ const RmBookingForm = () => {
         </div>
         <div className="flex items-center justify-between my-2 text-sm">
           <p>Nights:</p>
-          <p>{getDateDifference(formData.checkInDate, formData.checkOutDate)}</p>
+          <p>
+            {getDateDifference(formData.checkInDate, formData.checkOutDate)}
+          </p>
         </div>
         <div className="flex items-center justify-between my-2 text-sm">
           <p>Guests:</p>
@@ -182,7 +323,9 @@ const RmBookingForm = () => {
         <hr className="border border-gray-200 my-1 w-full" />
         <div className="flex items-center justify-between my-2 text-sm">
           <p className="text-lg md:text-xl font-medium">Total:</p>
-          <p className="text-green-600 font-medium text-lg md:text-xl">${totalBill}</p>
+          <p className="text-green-600 font-medium text-lg md:text-xl">
+            ${totalBill}
+          </p>
         </div>
 
         <div>
