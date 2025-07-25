@@ -1,9 +1,13 @@
 import { IoMdPeople } from "react-icons/io";
 import { MdOutlineWatchLater } from "react-icons/md";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 function RestaurantHeader() {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate("/tableBooking");
+  };
   return (
     <div>
       <div className="flex justify-between items-center md:flex-row flex-col px-5 w-full  text-center ">
@@ -13,9 +17,8 @@ function RestaurantHeader() {
             Manage tables, orders, and menu items
           </p>
         </div>
-        <div className="bg-gradient-to-r from-[#9433e8] to-[#e62cb1] hover:from-[#7b16d4] hover:to-[#9e1477] text-white font-medium rounded-lg flex gap-4 p-3 m-5">
-          <p>+</p>
-          <button> New Reservation</button>
+        <div onClick={handleClick} className="bg-gradient-to-r from-[#9433e8] to-[#e62cb1] hover:from-[#7b16d4] hover:to-[#9e1477] text-white font-medium rounded-lg flex gap-4 p-3 m-5">
+          <button>+ New Reservation</button>
         </div>
       </div>
 
@@ -69,7 +72,7 @@ function RestaurantHeader() {
       </div>
       <div className="bg-[#f3f4f6] w-full rounded-lg my-5 px-2 py-2 flex items-center justify-between gap-1">
         <NavLink
-          to="/"
+          to="/tables"
           className={({ isActive }) =>
             isActive
               ? "bg-black text-white rounded px-2 py-1 text-xs font-medium text-center flex-1"
